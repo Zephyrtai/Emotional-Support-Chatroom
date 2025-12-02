@@ -40,14 +40,15 @@ All services run inside Docker containers and are managed through Docker Compose
 ## Project Structure
 ```bash
 ES-chatroom/
-├── docker-compose.yml
 ├── api/
 │ ├── index.js
 │ ├── package.json
 │ ├── .env
 │ └── Dockerfile
-├── nginx.conf
+├── nginx/
 ├── wordpress/
+├── influxdb/
+├── docker-compose.yml
 └── README.md
 ```
 
