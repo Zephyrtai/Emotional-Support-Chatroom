@@ -44,7 +44,7 @@ ES-chatroom/
 ├── api/
 │ ├── index.js
 │ ├── package.json
-| ├── .env
+│ ├── .env
 │ └── Dockerfile
 ├── nginx.conf
 ├── wordpress/
