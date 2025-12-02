@@ -1,4 +1,4 @@
-# Emotional Support Chatroom
+# 🥰Emotional Support Chatroom
 
 This project is a real-time **Emotional Support Chatroom** built with a modern web stack and deployed on an **Azure Virtual Machine** using **Docker Compose**.  
 It integrates:
@@ -44,9 +44,11 @@ ES-chatroom/
 ├── api/
 │ ├── index.js
 │ ├── package.json
+| ├── .env
 │ └── Dockerfile
 ├── nginx.conf
-└── wordpress/
+├── wordpress/
+└── README.md
 ```
 
 ---
