@@ -1,39 +1,40 @@
-# 🥰Emotional Support Chatroom
+# 🥰 Emotional Support Chatroom
 
-This project is a real-time **Emotional Support Chatroom** built with a modern web stack and deployed on an **Azure Virtual Machine** using **Docker Compose**.  
-It integrates:
+A real-time Emotional Support Chatroom built with a modern multi-service architecture and deployed on an Azure Virtual Machine using Docker Compose.
 
-- **WordPress** — front-end website & chatroom UI  
-- **Node.js API** — backend API for handling chatroom logic  
-- **Nginx** — reverse proxy & unified entry point  
-- **InfluxDB (optional)** — for storing real-time IoT or chat analytics  
-- **Docker Compose** — to orchestrate all services
+This project integrates:
+
+- WordPress — front-end website & chatroom UI
+- Node.js API — backend WebSocket server for real-time messaging
+- Nginx — reverse proxy and unified entry point
+- Docker Compose — orchestrates and manages all services
 
 ---
 
 ## Features
 
-- Modern multi-service architecture  
-- Front-end powered by WordPress  
-- Custom backend API using Node.js + Express  
-- Nginx reverse proxy routing traffic to each service  
-- Containerized deployment (easy to start/stop/update)  
-- Designed to run reliably on Azure VM  
+- Real-time chat powered by WebSocket
+- WordPress-based UI for easy management and customization  
+- Node.js backend handling WebSocket connections and broadcasting
+- Nginx reverse proxy routing traffic to WordPress and the API  
+- Fully containerized deployment with Docker Compose
+- Designed to run continuously on Azure VM with minimal maintenance
 
 ---
 
 ## System Architecture
-```bash
-User
-↓
-Nginx Reverse Proxy
-↓
-├── WordPress (Frontend)
-├── Node.js API (Backend)
-└── InfluxDB (Database, optional)
+```scss
+Client (Browser)
+        ↓
+     Nginx (Reverse Proxy)
+   ┌──────────────┐
+   ↓              ↓
+WordPress      Node.js API (WebSocket)
+   ↓
+MySQL Database
 ```
 
-All services run inside Docker containers and are managed through Docker Compose.
+All components run inside Docker containers and are coordinated via docker-compose.yml.
 
 ---
 
@@ -41,13 +42,12 @@ All services run inside Docker containers and are managed through Docker Compose
 ```bash
 ES-chatroom/
 ├── api/
-│ ├── index.js
-│ ├── package.json
-│ ├── .env
-│ └── Dockerfile
-├── nginx/
+│   ├── server.js
+│   ├── package.json
+│   └── Dockerfile
 ├── wordpress/
-├── influxdb/
+├── nginx/
+│   └── nginx.conf
 ├── docker-compose.yml
 └── README.md
 ```
@@ -56,76 +56,61 @@ ES-chatroom/
 
 ## Technologies Used
 
-- **Azure Virtual Machine (Ubuntu)**  
-- **Docker & Docker Compose**  
-- **WordPress**  
-- **Node.js**  
-- **Nginx**  
-- **InfluxDB (optional)**  
+- **Microsoft Azure Virtual Machine (Ubuntu)**
+- **Docker & Docker Compose**
+- **WordPress**
+- **Node.js + WebSocket**
+- **Nginx reverse proxy**
+- **MySQL (via WordPress image)**
 
 ---
 
 ## ▶ How to Run (on Azure VM)
 
-### 1. Make sure Docker is installed
+1. Make sure Docker is installed
 ```bash
 docker --version
-docker-compose --version
+docker compose --version
 ```
+
 2. Start all services
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
-3. Stop the services
+3. View logs (helpful for debugging)
 ```bash
-docker-compose down
+docker compose logs -f
+```
+
+4. Stop the services
+```bash
+docker compose down
 ```
 
 ---
 
-### 2. Environment Variables
-Create a .env file (not pushed to GitHub):
+## ☑ Deployment Notes
 
-```bash
-API_PORT=3000
-INFLUX_USER=admin
-INFLUX_PASSWORD=your_password
-INFLUX_URL=http://influxdb:8086
-INFLUX_TOKEN=your_token
-INFLUX_ORG=your_org
-INFLUX_BUCKET=your_bucket
-```
+- WordPress is accessible at:
+http://<server-ip>/chat/  <!-- 51.120.24.144 --> 
 
----
+- The chatroom page template is stored inside the WordPress theme
+- The WebSocket server runs inside the api container
+- Nginx handles routing:
+    - / → WordPress
+    - /chat → Node.js API (WebSocket + HTTP)
 
-### 3. Deployment Workflow
-1. Modify project files
-2. Commit changes
-3. Push to GitHub
-4. Pull updates from GitHub in Azure VM (optional workflow)
-5. Restart Docker Compose
+## 🌟Future Improvements
 
-Example:
-```bash
-git add .
-git commit -m "Update"
-git push
-```
-
----
-
-## Future Improvements
-
-- Add WebSocket-based live chat
-- Add authentication
+- User authentication system
+- Moderation / report system
+- Store chat history in a database
 - Add HTTPS via Let's Encrypt
-
+- Admin dashboard for viewing chat logs
 ---
 
 ## License
 MIT License.
 
-## Author
-Zephyr Tai
 Project development & deployment on Azure VM.
