@@ -61,7 +61,7 @@ ES-chatroom/
 - **WordPress**
 - **Node.js + WebSocket**
 - **Nginx reverse proxy**
-- **MySQL (via WordPress image)**
+- **MySQL**
 
 ---
 
@@ -93,7 +93,7 @@ docker compose down
 ## ☑ Deployment Notes
 
 - WordPress is accessible at:
-http://<server-ip>/chat/  <!-- 51.120.24.144 --> 
+http://server-ip/chat/  <!-- 51.120.24.144 --> 
 
 - The chatroom page template is stored inside the WordPress theme
 - The WebSocket server runs inside the api container
