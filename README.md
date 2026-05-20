@@ -90,6 +90,16 @@ docker compose down
 
 ---
 
+## Screenshots
+![chatroom](screenshots/Chatroom.png)
+
+---
+
+## Demo
+Link: https://youtu.be/WnCXO7zE-iA
+
+---
+
 ## ☑ Deployment Notes
 
 - WordPress is accessible at:
@@ -100,6 +110,8 @@ http://server-ip/chat/  <!-- 51.120.24.144 -->
 - Nginx handles routing:
     - / → WordPress
     - /chat → Node.js API (WebSocket + HTTP)
+
+---
 
 ## 🌟Future Improvements
 
